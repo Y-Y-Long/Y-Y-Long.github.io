@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>ctfshow做题记录</title>
+      <link href="/2023/04/07/ctfshow%E5%81%9A%E9%A2%98%E8%AE%B0%E5%BD%95/"/>
+      <url>/2023/04/07/ctfshow%E5%81%9A%E9%A2%98%E8%AE%B0%E5%BD%95/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="ctfshow-vip题目限免wp"><a href="#ctfshow-vip题目限免wp" class="headerlink" title="ctfshow vip题目限免wp"></a>ctfshow vip题目限免wp</h1><h2 id="1-源码泄露"><a href="#1-源码泄露" class="headerlink" title="1.源码泄露"></a>1.源码泄露</h2><p>打开之后只看到了一句web1:where is flag?根据题目中说是源码泄露，直接右键查看源代码，在源代码的末尾位置看到了flag<br><img src="https://img-blog.csdnimg.cn/e3061e62832d440a9b02518b22c82d13.png" alt="在这里插入图片描述"></p><h2 id="2-前台JS绕过"><a href="#2-前台JS绕过" class="headerlink" title="2.前台JS绕过"></a>2.前台JS绕过</h2><p>打开题目链接后，发现一句“无法查看源代码”，此时发现鼠标的右键也是被禁用的，于是打开了浏览器的控制台，在元素中发现了flag<br><img src="https://img-blog.csdnimg.cn/19af8e3a1a2947d68b14cfee6c5ff70e.png" alt="在这里插入图片描述"></p><h2 id="3-协议头信息泄露"><a href="#3-协议头信息泄露" class="headerlink" title="3.协议头信息泄露"></a>3.协议头信息泄露</h2><p>根据题目中说是协议头信息泄露，于是直接f12，在控制台的网络中按ctrl+r进行刷新，最后在标头的响应头中发现flag<br><img src="https://img-blog.csdnimg.cn/d92081dac3d84d859c6e724759a68cdb.png" alt="在这里插入图片描述"></p><h2 id="4-robots后台泄露"><a href="#4-robots后台泄露" class="headerlink" title="4.robots后台泄露"></a>4.robots后台泄露</h2><p>首先看题目是跟robots有关，于是在网址的后面加上后缀&#x2F;robots.txt，然后发现这样一个东西<br><img src="https://img-blog.csdnimg.cn/0fe9fa43b4814e60a72e89eaf9f450f8.png" alt="在这里插入图片描述"><br>然后把这个东西复制到网址的后面，就可以得到flag了<br><img src="https://img-blog.csdnimg.cn/f93229289eaa4cc285b00c3f54e7e7d3.png" alt="在这里插入图片描述"></p><h2 id="5-phps源码泄露"><a href="#5-phps源码泄露" class="headerlink" title="5.phps源码泄露"></a>5.phps源码泄露</h2><p>根据题目提示，首先想到的就是要去查看php的源码，于是在网址的后面加上&#x2F;index.phps查看源码，输入后php源码被下载下来了，用记事本打开后发现了flag<br><img src="https://img-blog.csdnimg.cn/9854d183f6684d0781d734d5cb9bf42e.png" alt="在这里插入图片描述"></p><h2 id="6-源码压缩包泄露"><a href="#6-源码压缩包泄露" class="headerlink" title="6.源码压缩包泄露"></a>6.源码压缩包泄露</h2><p>根据题目推测，网页中应该有压缩包可以下载下来，输入<a href="http://www.zip,下载压缩包,发现说flag在fl000g.txt/">www.zip，下载压缩包，发现说flag在fl000g.txt</a><br><img src="https://img-blog.csdnimg.cn/ac6d157590574c4f99d6df6bfa8a846a.png" alt="在这里插入图片描述"><br>于是在网址的最后加上fl000g.txt，得到flag</p><h2 id="7-版本控制泄露源码"><a href="#7-版本控制泄露源码" class="headerlink" title="7.版本控制泄露源码"></a>7.版本控制泄露源码</h2><p>根据题目的版本控制，在网页上搜了一下相关的信息<br><img src="https://img-blog.csdnimg.cn/f281b64c35a249e094e00df59c6d58f2.png" alt="在这里插入图片描述"><br>根据搜索，我在网址末加上了一个&#x2F;.git，于是就得到了flag</p><h2 id="8-版本控制泄露源码2"><a href="#8-版本控制泄露源码2" class="headerlink" title="8.版本控制泄露源码2"></a>8.版本控制泄露源码2</h2><p>根据第七题的经验，版本控制信息除了git还有svn，于是在网址后加了一个&#x2F;.svn，于是就得到了flag</p><h2 id="9-vim临时文件泄露"><a href="#9-vim临时文件泄露" class="headerlink" title="9.vim临时文件泄露"></a>9.vim临时文件泄露</h2><p>通过搜索vim临时文件发现，他是一个swp文件，在网址的后面输入index.phps.swp即可下载文件，下载之后通过使用记事本打开，即可得到flag</p><h2 id="10-cookie泄露"><a href="#10-cookie泄露" class="headerlink" title="10.cookie泄露"></a>10.cookie泄露</h2><p>在之前曾经做过有关cookie的题目，所以首先我们需要找到本网页的cookie，于是我按下f12，在网络-文档中进行ctrl+r刷新查找cookie<br><img src="https://img-blog.csdnimg.cn/8182425351e74a1093ac9748e5a22a41.png" alt="在这里插入图片描述"><br>发现flag是一串这样的东西，但是输入后并不对，然后把%7B和%7D换成{}提交正确</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>hexo+github博客的搭建以及butterfly主题的安装</title>
       <link href="/2023/02/12/hexo-github%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA%E4%BB%A5%E5%8F%8Abutterfly%E4%B8%BB%E9%A2%98%E7%9A%84%E5%AE%89%E8%A3%85/"/>
       <url>/2023/02/12/hexo-github%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA%E4%BB%A5%E5%8F%8Abutterfly%E4%B8%BB%E9%A2%98%E7%9A%84%E5%AE%89%E8%A3%85/</url>
